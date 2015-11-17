@@ -1,0 +1,65 @@
+<div class="" data-ng-controller="PlanningController">
+  <div id="timeZonepanel">
+        <p>One last step:</p>
+        <p>We just need this two last info before accessing to the tool.</p>
+        <p>Your timezone:</p>
+
+        <select name="zones">
+                <option  ng-repeat="zone in zones" value="{{zone._id}}">{{zone.offset}} {{zone.customname == '' ? zone.name : zone.customname}} ({{zone.code}})</option>
+        </select>
+
+        <div>
+                Hours of work : <input id="range-slider" type="hidden" value="8, 17"/>
+        </div>
+
+        <a>Let's go</a>
+    </div>
+
+    <div id="planningPannel">
+        <select ng-model="selectedlanguage" ng-change="chooseLanguage()" ng-options="i.language for i in languages"></select>
+
+        <select name="zones">
+            <option  ng-repeat="zone in zones" value="{{zone._id}}">{{zone.offset}} {{zone.customname == '' ? zone.name : zone.customname}} ({{zone.code}})</option>
+        </select>
+    </div>
+	
+	From : <input type="text" class="form-control" ng-model="options.fromDate" max-date="{{options.toDate}}" start-date="{{options.currentDateValue.toString()}}" start-week="1" placeholder="From" bs-datepicker>
+    To : <input type="text" class="form-control" ng-model="options.toDate" min-date="{{options.fromDate}}" start-date="{{options.currentDateValue.toString()}}" start-week="1" placeholder="To" bs-datepicker>
+                                                   
+	<div class="container-content" ng-cloak="true">
+		<div gantt 
+			 data=data 
+			 from-date = "options.fromDate" 
+			 to-date = "options.toDate"
+			 column-width="getColumnWidth(options.width, options.scale, options.zoom)"
+			 auto-expand="options.autoExpand"
+			 current-date="options.currentDate"
+			 current-date-value="options.currentDateValue"
+			 sort-mode="options.sortMode"
+			 time-frames="options.timeFrames"
+             date-frames="options.dateFrames"
+			 api="options.api">
+			<gantt-tree></gantt-tree>
+			<gantt-table></gantt-table>
+			<gantt-sortable></gantt-sortable>
+			<gantt-movable enabled="!options.readOnly"></gantt-movable>
+			<gantt-tooltips></gantt-tooltips>
+			<gantt-draw-task enabled="true" task-factory="drawTaskFactory" move-threshold="2" ></gantt-draw-task>
+		</div>
+	</div>
+	
+	<script type="text/ng-template" id="tagsList">
+		<div ng-show="!createTaskPanel">
+			Define your task
+			<ul ng-repeat="(key, tag) in tags">
+				<li ng-click = "chooseTag(key);">{{tag.name}}</li>
+			</ul>
+		</div>
+
+		<div ng-show="createTaskPanel">
+			<input type="text" name="taskName" ng-model="taskName" />
+			<input type="submit" name="createTask" ng-click="saveTask();" />
+		</div>
+	</script>
+</div>
+

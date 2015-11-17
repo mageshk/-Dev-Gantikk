@@ -1,0 +1,82 @@
+<div data-ng-controller="SettingController" data-ng-init="timezones()">
+    Settings 
+    <div id="logo_panel">
+		<form id="logoUploadForm" method="post" action="api/upload/logo" enctype="multipart/form-data">
+			Logo : 
+			<input ng-model="photo" onchange="angular.element(this).scope().logoUpload(this.files)" type="file" accept="image/*" />
+		</form>
+    </div>
+
+    <div>
+		Only allow the access to the tool to specific domain names :
+		<input type="text" name="domains" id="domains" ng-model="settings.domains"/>
+    </div>
+
+    <div data-ng-init="getTags()">
+		Types of projects : 
+
+		<ul>
+			<li ng-repeat="(key, tag) in tags" id="tag_{{key}}" style="background-color: {{tag.color}}">
+				<a ng-click="removeTag(tag, key)">X</a>
+				<a ng-click="getTag(key, tag._id);" >{{tag.name}}</a>
+			</li>
+
+			<li ng-click="createTag();">+ Add a new tag</li>
+		</ul>
+    </div>
+
+    <div>
+		Default timezone :  
+		<select name="zones" ng-model="settings.defaulttimezone">
+            <option  ng-repeat="zone in zones" value="{{zone._id}}" ng-selected="{{settings.defaulttimezone === zone._id}}">
+				{{zone.offset}} {{zone.customname == '' ? zone.name : zone.customname}} ({{zone.code}})
+			</option>
+        </select>
+    </div>
+
+    <div ng-cloak>
+		Hours of work : <input id="range-slider" type="hidden" value="{{settings.workingHours}}" ng-model="settings.workingHours"/>
+    </div>
+
+    <div>
+		Times availables : 
+		<select name="availablezones" multiple>
+			<option ng-repeat="(key, zone) in zones" ng-click="getTimezone(key)" value="{{zone._id}}">
+				{{zone.offset}} {{zone.customname == '' ? zone.name : zone.customname}} ({{zone.code}})
+			</option>
+		</select>
+    </div>
+
+    <a ng-click="manageSettings(settings._id)">Save the settings</a>
+	
+	<script type="text/ng-template" id="tagDialog">
+		<div>
+			Name of the tag :
+			<input type="text" id="tagName" ng-model="tag.name"/>
+		</div>
+		<div>
+			Color of the tag: 
+			<input type="hidden" id="colorPicker" />
+			<input type="text" id="tagColor" ng-model="tag.color"/>
+		</div>
+		<div>
+			Does the project has to be present in a pre-existing list?
+			<input type="checkbox" value="1" id="exProject" ng-model="projectExisting"> 
+		</div>
+		<div ng-show="projectExisting">
+			Please indicate the link to the json file:
+			<input type="text" id="prjJSON" ng-model="tag.jsonLink" />
+		</div>
+
+		<p><a href="">More info regarding the json file</a></p>
+		<a id="saveTag" ng-click="manageTag(tag._id)">Save the tag</a>
+	</script>
+	
+	<script type="text/ng-template" id="updateZone">
+		<div>
+			{{timezone.name}}
+			Custom name :
+			<input type="text" id="tagName" ng-model="timezone.customname"/>
+			<a id="save-tag" ng-click="updateTimezone(timezone._id)">OK</a>
+		</div>
+	</script>

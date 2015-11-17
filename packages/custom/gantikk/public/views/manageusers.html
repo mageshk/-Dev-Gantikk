@@ -1,0 +1,61 @@
+<div data-ng-controller="ManageuserController">
+    Users
+
+    Chose the user to check its role:
+
+    <input type="text" name="search-user" id="search-user" ng-model="query" />
+
+    <ul ng-repeat="users in userList">
+            <li ng-repeat="(key, value) in users | filter : query | orderBy : 'value.name'" ng-click="selectUser(key);">{{value.name}}</li>
+    </ul>
+
+    <a ng-click="addResource()">Add an new user</a>
+
+    <div>
+            Default timezone : <select name="zones" ng-repeat="timezone in timezoneList">
+                    <option ng-repeat="zone in timezone" value="{{zone.id}}" ng-selected="{{zone.is_default === 1 ? true : false}}">{{zone.name}}</option>
+            </select>
+    </div>
+
+    <div>
+            Hours of work : <input id="range-slider" type="hidden" value="8, 17"/>
+    </div>
+
+    Is {{name}} super admin ? <input type="checkbox" value="1" id="isAdmin">
+
+    <div style="width:300px; height : 450px; border : 1px solid #000;">
+            <div id="grp_{{key}}" data-type="group" ng-repeat="(key, group) in groups">
+                    {{group}}
+
+                    <a>No rights</a>
+                    <a>View</a>
+                    <a>Edit</a>
+
+                    <div id="sgrp_{{key}}" data-type="sgroup" ng-repeat="(key, subgroup) in subgroups">
+                            {{subgroup}}
+
+                            <a>No rights</a>
+                            <a>View</a>
+                            <a>Edit</a>
+
+                            <div id="user_{{key}}" data-type="resource" ng-repeat="(key, user) in users">
+                                    {{user}}
+
+                                    <a>No rights</a>
+                                    <a>View</a>
+                                    <a>Edit</a>
+                            </div>
+                    </div>
+            </div>
+    </div>
+
+    <div id="resourcePanel" style="display: none;">
+            What kind of resource ?
+
+            <input type="text" name="user-name" id="userName" />
+            <input type="text" name="user-email" id="userEmail" />
+
+            <input type="checkbox" name="invitation" id="invitation" /> Send an invitation
+            <a id="addUser" ng-click="addUser()">Add this user</a>
+    </div>
+</div>

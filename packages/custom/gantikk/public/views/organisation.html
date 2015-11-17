@@ -1,0 +1,40 @@
+<div data-ng-controller="OrganisationController">
+    Organisation
+
+    <a ng-click="openDialog()">Add an new resource</a>
+
+    All resources
+
+    <input type="text" name="search-resource" id="search-resource" ng-model="query" />
+
+    <div class="draggable" ng-repeat="user in users | filter : query | orderBy : 'user'">
+            {{user}}
+    </div>
+
+
+    <div class="removeItem" style="height : 200px; width : 200px; border : 1px solid #ccc;"></div>
+
+    <div class="droppable" style="width:300px; height : 450px; border : 1px solid #000;">
+		<div id="grp_{{key}}" class="sortable" data-type="group" ng-repeat="(key, group) in groups">
+				{{group}}
+				<div id="sgrp_{{key}}" class="sortable" data-type="sgroup" ng-repeat="(key, subgroup) in subgroups">
+						{{subgroup}}
+						<div id="user_{{key}}" class="sortable" data-type="resource" ng-repeat="(key, user) in users">
+							{{user}}
+						</div>
+				</div>
+		</div>
+    </div>
+
+    <a ng-click="addResource()">Add an new group</a>
+
+    <div id="resource-dialog" style="display : none;">
+            What kind of resource ?
+
+            <input type="text" name="user-name" id="user-name" />
+            <input type="text" name="user-email" id="user-email" />
+
+            <input type="checkbox" name="invitation" id="invitation" /> Send an invitation
+            <a id="add-user" ng-click="addUser()">Add this user</a>
+    </div>
+</div>
