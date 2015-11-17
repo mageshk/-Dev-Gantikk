@@ -1,0 +1,43 @@
+{
+  "core": {
+    "css": {
+      "bower_components/build/css/dist.min.css": [
+        "bower_components/angular/angular-csp.css",
+        "bower_components/angular-ui-select/dist/select.min.css",
+		"bower_components/bootstrap/dist/css/bootstrap.css",
+		"bower_components/angular-motion/dist/angular-motion.css",
+		"bower_components/font-awesome/css/font-awesome.css",
+		"bower_components/angular-ui-tree/dist/angular-ui-tree.min.css",
+		"bower_components/angular-gantt/assets/angular-gantt.css",
+		"bower_components/angular-gantt/assets/angular-gantt-plugins.css"
+      ]
+    },
+    "js": {
+      "bower_components/build/js/dist.min.js": [
+        "bower_components/jquery/dist/jquery.min.js",
+        "bower_components/angular/angular.min.js",
+        "bower_components/angular-mocks/angular-mocks.js",
+        "bower_components/angular-cookies/angular-cookies.min.js",
+        "bower_components/angular-resource/angular-resource.min.js",
+        "bower_components/angular-sanitize/angular-sanitize.min.js",
+        "bower_components/angular-ui-router/release/angular-ui-router.min.js",
+        "bower_components/angular-jwt/dist/angular-jwt.min.js",
+		"bower_components/angular-animate/angular-animate.js",
+		"bower_components/angular-strap/dist/angular-strap.js",
+		"bower_components/angular-strap/dist/angular-strap.tpl.js",
+		"bower_components/angular-native-dragdrop/draganddrop.js",
+		"bower_components/angular-ui-tree/dist/angular-ui-tree.js",
+		"bower_components/moment/moment.js",
+		"bower_components/angular-moment/angular-moment.js",
+		"bower_components/angular-gantt/assets/angular-gantt.js",
+		"bower_components/angular-gantt/assets/angular-gantt-plugins.js",
+		"bower_components/moment-range/lib/moment-range.js",
+		"bower_components/css-element-queries/src/ElementQueries.js",
+		"bower_components/css-element-queries/src/ResizeSensor.js",
+        "bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
+        "bower_components/angular-ui-select/dist/select.min.js",
+        "bower_components/web-bootstrap/index.js"
+      ]
+    }
+  }
+}
